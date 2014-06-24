@@ -1,0 +1,22 @@
+<div ng-controller="ClientsCtrl">
+  <h3>Clients:</h3>
+  <ul>
+    <li ng-repeat="client in clients">
+      {{client.name}} <a href="#/clients/{{client.id}}" class="edit-client">edit</a> <a href="#" class="remove-client" ng-click="removeClient(client, $event)">remove</a>
+    </li>
+  </ul>
+
+  <hr>
+
+  <h4>Add a client</h4>
+  <form name="clientForm" action="" ng-submit="clientForm.$valid && addClient(client)" novalidate>
+    <div class="form-group">
+      <label for="">Name:</label>
+      <input type="text" class="form-control" ng-model="client.name" required>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" value="Add client" class="btn btn-success">
+    </div>
+  </form>
+</div>

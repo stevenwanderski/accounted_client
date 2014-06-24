@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" ng-app="accounted">
+<head>
+  <meta charset="utf-8">
+  <title>Accounted</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/routes.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers/clients_controller.js"></script>
+  <script src="js/controllers/payments_controller.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Accounted</h1>
+    <a href="#payments">Payments</a> <a href="#clients">Clients</a>
+    <hr>
+
+    <div ng-view></div>
+  </div>
+</body>

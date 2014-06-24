@@ -1,0 +1,22 @@
+<div ng-controller="PaymentsCtrl">
+  <h3>Payments:</h3>
+  <ul>
+    <li ng-repeat="payment in payments">
+      {{payment.amount}} (<a href="#" class="remove-payment" ng-click="removePayment(payment, $event)">remove</a>)
+    </li>
+  </ul>
+
+  <hr>
+
+  <h4>Add a payment</h4>
+  <form name="paymentForm" action="" ng-submit="paymentForm.$valid && addPayment(payment)" novalidate>
+    <div class="form-group">
+      <label for="">Amount:</label>
+      <input type="text" class="form-control" ng-model="payment.amount" required>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" value="Add payment" class="btn btn-success">
+    </div>
+  </form>
+</div>
