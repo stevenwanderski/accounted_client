@@ -13,6 +13,10 @@ accountedApp.config(['$routeProvider',
         templateUrl: 'partials/payments.html',
         controller: 'PaymentsCtrl'
       }).
+      when('/payments/:id', {
+        templateUrl: 'partials/payment_edit.html',
+        controller: 'PaymentsCtrl'
+      }).
       otherwise({
         redirectTo: '/payments'
       });

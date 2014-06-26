@@ -22,7 +22,7 @@ describe('clients', function(){
       browser.get('app/#/clients');
       element(by.model('client.name')).sendKeys('Frank Zappa');
       element(by.css('input[type="submit"]')).click();
-      expect(element.all(by.repeater('client in clients')).count()).toEqual(1);
+      expect(element.all(by.css('.client-item')).get(0).getText()).toContain('Frank Zappa');
     });
   });
 

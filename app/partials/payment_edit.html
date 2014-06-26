@@ -1,15 +1,6 @@
 <div ng-controller="PaymentsCtrl">
-  <h3>Payments:</h3>
-  <ul>
-    <li ng-repeat="payment in payments" class="payment-item">
-      {{payment.amount_in_cents}} <a href="#/payments/{{payment.id}}" class="edit-payment">edit</a> <a href="#" class="remove-payment" ng-click="removePayment(payment, $event)">remove</a>
-    </li>
-  </ul>
-
-  <hr>
-
-  <h4>Add a payment</h4>
-  <form name="paymentForm" action="" ng-submit="paymentForm.$valid && addPayment(payment)" novalidate>
+  <h4>Edit payment</h4>
+  <form name="paymentForm" action="" ng-submit="paymentForm.$valid && updatePayment(payment)" novalidate>
     <div class="form-group">
       <label for="">Amount:</label>
       <input type="number" class="form-control" ng-model="payment.amount_in_cents" required>
@@ -17,9 +8,8 @@
 
     <div class="form-group">
       <label for="client_id">Client:</label>
-      <select name="client_id" id="client_id" ng-model="payment.client_id" required>
+      <select name="client_id" id="client_id" ng-model="payment.client_id" ng-options="client.id as client.name for client in clients" required>
         <option value="">Choose...</option>
-        <option ng-repeat="client in clients" value="{{client.id}}">{{client.name}}</option>
       </select>
     </div>
 

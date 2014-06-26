@@ -1,7 +1,7 @@
 <div ng-controller="ClientsCtrl">
   <h3>Clients:</h3>
   <ul>
-    <li ng-repeat="client in clients">
+    <li ng-repeat="client in clients" class="client-item">
       {{client.name}} <a href="#/clients/{{client.id}}" class="edit-client">edit</a> <a href="#" class="remove-client" ng-click="removeClient(client, $event)">remove</a>
     </li>
   </ul>

@@ -5,9 +5,7 @@ angular.module('accountedControllers').controller('ClientsCtrl', function ($scop
   };
 
   $scope.addClient = function (client) {
-    Client.save(client, function(data){
-      $scope.clients.push(data);
-    });
+    $scope.clients.push(Client.save(client));
     $scope.reset();
   };
 

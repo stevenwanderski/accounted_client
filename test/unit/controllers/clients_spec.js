@@ -39,6 +39,7 @@ describe('clients controller', function(){
     });
 
     it('adds the new client the clients array', function(){
+      httpMock.flush();
       scope.addClient({ name: 'Frank Zappa' });
       httpMock.flush();
       expect(scope.clients.length).toEqual(2);
