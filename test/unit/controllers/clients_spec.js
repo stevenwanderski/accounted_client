@@ -70,11 +70,12 @@ describe('clients controller', function(){
       httpMock.flush();
     });
 
-    it('retrieves a fresh array of clients', function(){
-      httpMock.expectGET('http://localhost:3000/api/clients');
-      httpMock.expectGET('http://localhost:3000/api/clients');
+    it('decrements clients array by 1', function(){
+      httpMock.flush();
+      scope.clients.push({ id: 2, name: 'Frank Zappa' });
       scope.removeClient({ id: 1 }, event);
       httpMock.flush();
+      expect(scope.clients.length).toBe(1);
     });
   });
 
@@ -105,6 +106,40 @@ describe('clients controller', function(){
         scope.init();
         httpMock.flush();
         expect(scope.client.name).toEqual('Andrew Bird');
+      });
+    });
+  });
+
+  describe('#submit', function(){
+    describe('invalid form', function(){
+      it('returns false', function(){
+        httpMock.flush();
+        form = { $valid: false };
+        client = {};
+        expect(scope.submit(form, client)).toBe(false);
+      });
+    });
+
+    describe('new client', function(){
+      it('calls addClient', function(){
+        httpMock.flush();
+        form = { $valid: true };
+        client = {};
+        spyOn(scope, 'addClient');
+        scope.submit(form, client);
+        expect(scope.addClient).toHaveBeenCalledWith(client);
+      });
+    });
+
+    describe('update client', function(){
+      it('calls updateClient', function(){
+        httpMock.flush();
+        form = { $valid: true };
+        client = {};
+        spyOn(scope, 'route_params_id').andReturn(1);
+        spyOn(scope, 'updateClient');
+        scope.submit(form, client);
+        expect(scope.updateClient).toHaveBeenCalledWith(client);
       });
     });
   });

@@ -1,0 +1,27 @@
+<form name="paymentForm" action="" ng-submit="submit(paymentForm, payment)" novalidate>
+  <div class="form-group">
+    <label for="">Amount:</label>
+    <input type="number" class="form-control" ng-model="payment.amount_in_cents" required>
+  </div>
+
+  <div class="form-group">
+    <label for="client_id">Client:</label>
+    <select name="client_id" id="client_id" ng-model="payment.client_id" required>
+      <option value="">Choose...</option>
+      <option ng-repeat="client in clients" value="{{client.id}}">{{client.name}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="payment_type">Type:</label>
+    <select name="payment_type" id="payment_type" ng-model="payment.payment_type">
+      <option value="">Choose...</option>
+      <option value="revenue">Revenue</option>
+      <option value="expense">Expense</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <input type="submit" value="Add payment" class="btn btn-success">
+  </div>
+</form>

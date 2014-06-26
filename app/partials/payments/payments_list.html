@@ -1,0 +1,5 @@
+<ul>
+  <li ng-repeat="payment in payments" class="payment-item">
+    {{payment.amount_in_cents}} <a href="#/payments/{{payment.id}}" class="edit-payment">edit</a> <a href="#" class="remove-payment" ng-click="removePayment(payment, $event)">remove</a>
+  </li>
+</ul>

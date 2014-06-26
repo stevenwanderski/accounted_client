@@ -18,9 +18,7 @@ angular.module('accountedControllers').controller('ClientsCtrl', function ($scop
   $scope.removeClient = function (client, $event) {
     $event.preventDefault();
     Client.delete({ id: client.id }, function(){
-      Client.query(function(data) {
-        $scope.clients = data;
-      });
+      $scope.clients = _.reject($scope.clients, function(_client){ return _client.id == client.id; });
     });
   };
 
@@ -32,19 +30,25 @@ angular.module('accountedControllers').controller('ClientsCtrl', function ($scop
     return $routeParams.id;
   };
 
+  $scope.submit = function(form, client){
+    if(form.$valid === false){
+      return false;
+    }
+    if($scope.route_params_id()){
+      $scope.updateClient(client);
+    }else{
+      $scope.addClient(client);
+    }
+  };
+
   var initialize_clients = function(){
-    $scope.clients = [];
-    Client.query(function(data) {
-      $scope.clients = data;
-    });
+    $scope.clients = Client.query();
   };
 
   var initialize_client = function(){
     $scope.client = {};
     if($scope.route_params_id()){
-      Client.get({ id: $scope.route_params_id() }, function(client){
-        $scope.client = client;
-      });
+      $scope.client = Client.get({ id: $scope.route_params_id() });
     }
   };
 

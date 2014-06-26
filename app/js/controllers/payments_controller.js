@@ -31,27 +31,30 @@ angular.module('accountedControllers').controller('PaymentsCtrl', function ($sco
     return $routeParams.id;
   };
 
+  $scope.submit = function(form, client){
+    if(form.$valid === false){
+      return false;
+    }
+    if($scope.route_params_id()){
+      $scope.updatePayment(client);
+    }else{
+      $scope.addPayment(client);
+    }
+  };
+
   var initialize_payment = function(){
     $scope.payment = {};
     if($scope.route_params_id()){
-      Payment.get({ id: $scope.route_params_id() }, function(payment){
-        $scope.payment = payment;
-      });
+      $scope.payment = Payment.get({ id: $scope.route_params_id() });
     }
   };
 
   var initialize_payments = function(){
-    $scope.payments = [];
-    Payment.query(function(data){
-      $scope.payments = data;
-    });
+    $scope.payments = Payment.query();
   };
 
   var initialize_clients = function(){
-    $scope.clients = [];
-    Client.query(function(data) {
-      $scope.clients = data;
-    });
+    $scope.clients = Client.query();
   };
 
   $scope.init();

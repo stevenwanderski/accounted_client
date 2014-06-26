@@ -109,6 +109,40 @@ describe('PaymentsCtrl', function(){
     });
   });
 
+  describe('#submit', function(){
+    describe('invalid form', function(){
+      it('returns false', function(){
+        httpMock.flush();
+        form = { $valid: false };
+        payment = {};
+        expect(scope.submit(form, payment)).toBe(false);
+      });
+    });
+
+    describe('new payment', function(){
+      it('calls addPayment', function(){
+        httpMock.flush();
+        form = { $valid: true };
+        payment = {};
+        spyOn(scope, 'addPayment');
+        scope.submit(form, payment);
+        expect(scope.addPayment).toHaveBeenCalledWith(payment);
+      });
+    });
+
+    describe('update payment', function(){
+      it('calls updatePayment', function(){
+        httpMock.flush();
+        form = { $valid: true };
+        payment = {};
+        spyOn(scope, 'route_params_id').andReturn(1);
+        spyOn(scope, 'updatePayment');
+        scope.submit(form, payment);
+        expect(scope.updatePayment).toHaveBeenCalledWith(payment);
+      });
+    });
+  });
+
   var payment_factory = function(){
     return {
       id: 1,
